@@ -1,60 +1,60 @@
-# 🚀 FULL SETUP WSL2 + Ubuntu 22.04 LTS di Windows
+# 🚀 FULL SETUP WSL2 + UBUNTU (VERSI LTS & NON-LTS) DI WINDOWS
 
-Dokumentasi ini berisi panduan lengkap untuk:
+Dokumentasi ini menjelaskan instalasi lengkap:
 
-- Install WSL2
-- Install Ubuntu 22.04 LTS
-- Set default user menjadi root
-- Konfigurasi dasar sistem
-- Setup environment development
+- WSL2
+- Ubuntu 22.04 LTS
+- Ubuntu versi terbaru (non-LTS / default)
+- Konfigurasi default user
+- Setup dasar development
 - Troubleshooting
 - Best practice
 
 Support untuk:
-- Windows 10 (versi 2004 ke atas)
+- Windows 10 (2004+)
 - Windows 11
 
 ---
 
-# 📌 1. Persyaratan Sistem
+# 📌 1. PERSYARATAN
 
-Pastikan sistem memenuhi syarat berikut:
+Pastikan:
 
-- Windows 10 (2004+) / Windows 11
 - Virtualization aktif di BIOS (Intel VT-x / AMD-V)
 - Akses Administrator
-- Koneksi internet aktif
+- Internet aktif
+- Windows sudah update
 
 ---
 
-# 🔧 2. Install WSL2
+# 🔧 2. INSTALL WSL2
 
 ## 2.1 Buka PowerShell sebagai Administrator
 
-1. Klik **Start**
-2. Ketik: `PowerShell`
-3. Klik kanan → **Run as Administrator**
+- Klik Start
+- Ketik `PowerShell`
+- Klik kanan → **Run as Administrator**
 
 ---
 
-## 2.2 Install WSL (Metode Otomatis - Direkomendasikan)
+## 2.2 Install WSL Otomatis (Direkomendasikan)
 
 ```powershell
 wsl --install
 ```
 
-Perintah ini akan otomatis:
+Perintah ini akan:
 
 - Mengaktifkan Windows Subsystem for Linux
 - Mengaktifkan Virtual Machine Platform
 - Menginstall WSL2
 - Menginstall Ubuntu default
 
-Setelah selesai → **Restart komputer**
+Restart komputer setelah selesai.
 
 ---
 
-## 2.3 Set Default WSL ke Versi 2
+## 2.3 Pastikan Menggunakan WSL2
 
 ```powershell
 wsl --set-default-version 2
@@ -74,75 +74,95 @@ wsl -l -v
 
 ---
 
-# 🐧 3. Install Ubuntu 22.04 LTS
+# 🐧 3. INSTALL UBUNTU 22.04 LTS
 
-## Opsi 1 (Direkomendasikan - Command Line)
+## 3.1 Install Ubuntu 22.04 LTS
 
 ```powershell
 wsl --install -d Ubuntu-22.04
 ```
 
-## Opsi 2 (Microsoft Store)
-
-1. Buka **Microsoft Store**
-2. Cari: **Ubuntu 22.04 LTS**
-3. Klik **Install**
+Atau install via Microsoft Store:
+Cari: **Ubuntu 22.04 LTS**
 
 ---
 
-# ▶ 4. Menjalankan Ubuntu
+## 3.2 Jalankan Ubuntu 22.04 LTS
 
 ```powershell
-wsl
+wsl -d Ubuntu-22.04
 ```
 
-atau
+Saat pertama kali dijalankan akan muncul:
 
-```powershell
-ubuntu
+```
+Enter new UNIX username:
 ```
 
-Pada first launch Anda akan diminta membuat:
-
-- Username
-- Password
+User yang dibuat di sini akan menjadi default user.
 
 ---
 
-# 👑 5. Set Default User Menjadi Root
+## 3.3 Set Default User ke root (Opsional)
 
-Secara default Ubuntu menggunakan user biasa.
+```powershell
+ubuntu2204 config --default-user root
+```
 
-Jika ingin login langsung sebagai root:
+Atau:
 
-Jalankan di PowerShell:
+```powershell
+ubuntu2204.exe config --default-user root
+```
+
+Cek:
+
+```powershell
+wsl -d Ubuntu-22.04 whoami
+```
+
+---
+
+# 🐧 4. INSTALL UBUNTU VERSI TERBARU (NON-LTS / DEFAULT)
+
+## 4.1 Install Ubuntu (Versi Default Store)
+
+```powershell
+wsl --install -d Ubuntu
+```
+
+Atau install dari Microsoft Store:
+Cari: **Ubuntu**
+
+Versi ini biasanya versi terbaru non-LTS.
+
+---
+
+## 4.2 Jalankan Ubuntu Non-LTS
+
+```powershell
+wsl -d Ubuntu
+```
+
+Akan diminta membuat username & password.
+
+---
+
+## 4.3 Set Default User ke root (Opsional)
 
 ```powershell
 ubuntu config --default-user root
 ```
 
-atau
+Cek:
 
 ```powershell
-ubuntu.exe config --default-user root
-```
-
-Verifikasi:
-
-```powershell
-wsl
-whoami
-```
-
-Output harus:
-
-```
-root
+wsl -d Ubuntu whoami
 ```
 
 ---
 
-# 🔄 6. Update dan Upgrade Ubuntu
+# 🔄 5. UPDATE SISTEM (BERLAKU UNTUK SEMUA VERSI)
 
 Masuk ke Ubuntu lalu jalankan:
 
@@ -150,7 +170,7 @@ Masuk ke Ubuntu lalu jalankan:
 apt update && apt upgrade -y
 ```
 
-Install package dasar:
+Install paket dasar:
 
 ```bash
 apt install build-essential curl wget git unzip software-properties-common -y
@@ -158,7 +178,7 @@ apt install build-essential curl wget git unzip software-properties-common -y
 
 ---
 
-# 📦 7. Install Tools Development (Opsional)
+# 📦 6. INSTALL TOOLS DEVELOPMENT
 
 ## Install Git
 
@@ -169,7 +189,7 @@ git --version
 
 ---
 
-## Install NodeJS (LTS)
+## Install NodeJS LTS
 
 ```bash
 curl -fsSL https://deb.nodesource.com/setup_lts.x | bash -
@@ -190,7 +210,7 @@ pip3 --version
 
 ---
 
-## Install Docker (Opsional)
+## Install Docker
 
 ```bash
 apt install docker.io -y
@@ -200,14 +220,20 @@ docker --version
 
 ---
 
-# 📁 8. Struktur File System
+# 📁 7. AKSES FILE SYSTEM
 
 ## Akses File Linux dari Windows
 
-Buka File Explorer dan akses:
+Buka File Explorer:
 
 ```
 \\wsl$\Ubuntu-22.04\
+```
+
+atau
+
+```
+\\wsl$\Ubuntu\
 ```
 
 ---
@@ -221,9 +247,9 @@ Buka File Explorer dan akses:
 
 ---
 
-# 🧠 9. Perintah Penting WSL
+# 🧠 8. PERINTAH PENTING WSL
 
-## Melihat daftar distro
+## Lihat semua distro
 
 ```powershell
 wsl -l -v
@@ -233,6 +259,7 @@ wsl -l -v
 
 ```powershell
 wsl -d Ubuntu-22.04
+wsl -d Ubuntu
 ```
 
 ## Shutdown WSL
@@ -241,15 +268,91 @@ wsl -d Ubuntu-22.04
 wsl --shutdown
 ```
 
-## Restart WSL
-
-```powershell
-wsl --shutdown
-wsl
-```
-
-## Uninstall Ubuntu
+## Uninstall distro
 
 ```powershell
 wsl --unregister Ubuntu-22.04
+wsl --unregister Ubuntu
 ```
+
+---
+
+# ⚙ 9. TROUBLESHOOTING
+
+## Virtualization Not Enabled
+
+Masuk BIOS → Aktifkan:
+- Intel VT-x
+- AMD-V
+
+---
+
+## Kernel Update Error
+
+Download manual:
+
+https://aka.ms/wsl2kernel
+
+Install lalu restart.
+
+---
+
+## WSL Lambat
+
+Rekomendasi:
+
+- Simpan project di dalam `/home`
+- Hindari bekerja langsung di `/mnt/c`
+
+---
+
+# 🔐 10. BEST PRACTICE
+
+- Gunakan user biasa untuk development
+- Gunakan root hanya jika diperlukan
+- Update rutin:
+
+```bash
+apt update && apt upgrade -y
+```
+
+- Simpan project di:
+
+```
+/home/username/project
+```
+
+---
+
+# 🧹 11. RESET TOTAL WSL
+
+Uninstall distro:
+
+```powershell
+wsl --unregister Ubuntu-22.04
+wsl --unregister Ubuntu
+```
+
+Uninstall WSL:
+
+```powershell
+wsl --uninstall
+```
+
+Restart lalu install ulang.
+
+---
+
+# ✅ SELESAI
+
+Sekarang Anda memiliki:
+
+- WSL2 aktif
+- Ubuntu 22.04 LTS terinstall
+- Ubuntu versi terbaru (non-LTS) terinstall
+- Default user dapat diatur
+- Environment siap untuk development
+
+---
+
+🚀 Selamat menggunakan WSL2 + Ubuntu
